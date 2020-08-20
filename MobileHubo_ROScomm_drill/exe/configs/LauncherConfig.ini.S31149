@@ -1,0 +1,12 @@
+[General]
+="======"
+daemon=/home/rainbow/Desktop/GitHub/MobileHubo_ROScomm/exe/Daemon
+exfl=false
+exfr=true
+fog=false
+gazebo=false
+geo_hori=80
+geo_vert=60
+gui=/home/rainbow/Desktop/GitHub/MobileHubo_ROScomm/exe/PODOGUI
+ros=true
+show=true

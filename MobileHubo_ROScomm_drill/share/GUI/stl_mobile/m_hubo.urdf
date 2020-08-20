@@ -1,0 +1,3386 @@
+<?xml version="1.0" ?>
+<robot
+  xmlns:xacro="http://www.ros.org/wiki/xacro" 
+  xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+  xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+  xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+  name="m_hubo">
+
+  <!-- Constants for robot dimensions -->
+  <xacro:property name="PI" value="3.1415926535897931"/>
+
+  <!--Transmission-->
+  <!--LEFT ARM-->
+  <transmission name="tran1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="LSP">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LSP_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="LSR">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LSR_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran3">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="LSY">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LSY_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran4">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="LEB">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LEB_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran5">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="LWY">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LWY_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran6">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="LWP">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LWP_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+<!--  <transmission name="tran7">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="LWFT">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LWFT_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+-->
+
+  <transmission name="tran8">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="LWY2">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LWY2_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <!--Right ARM-->
+  <transmission name="tran9">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RSP">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RSP_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran10">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RSR">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RSR_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran11">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RSY">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RSY_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="tran12">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="REB">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="REB_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran13">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RWY">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RWY_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran14">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RWP">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RWP_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+<!--
+  <transmission name="tran15">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RWFT">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RWFT_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+-->
+
+  <transmission name="tran15">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RWY2">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RWY2_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+
+  <!--WHBASE, TORSO-->
+  <transmission name="tran16">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="WHBASE">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="WHBASE_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran17">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="whbase_to_lwh">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface> 
+<!--      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface> -->
+    </joint>
+    <actuator name="whbase_to_lwh_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+      <hardwareInterface>VelocityJointInterface</hardwareInterface> 
+<!--      <hardwareInterface>EffortJointInterface</hardwareInterface> -->
+    </actuator>
+  </transmission>
+
+  <transmission name="tran18">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="whbase_to_rwh">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface> 
+<!--      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface> -->
+    </joint>
+    <actuator name="whbase_to_rwh_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+      <hardwareInterface>VelocityJointInterface</hardwareInterface> 
+<!--      <hardwareInterface>EffortJointInterface</hardwareInterface> -->
+    </actuator>
+  </transmission>
+
+
+  <!--LEFT Hand-->
+  <transmission name="tran19">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="LHAND_a1">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LHAND_a1_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran20">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="LHAND_a2">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LHAND_a2_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran21">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="LHAND_a3">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LHAND_a3_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran22">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="LHAND_b1">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LHAND_b1_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran23">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="LHAND_b2">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LHAND_b2_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran24">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="LHAND_b3">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LHAND_b3_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran25">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="LHAND_c1">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LHAND_c1_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran26">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="LHAND_c2">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LHAND_c2_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran27">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="LHAND_c3">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LHAND_c3_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <!--RIGHT Hand-->
+  <transmission name="tran28">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RHAND_a1">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RHAND_a1_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="tran29">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RHAND_a2">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RHAND_a2_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="tran30">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RHAND_a3">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RHAND_a3_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran31">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RHAND_b1">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RHAND_b1_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran32">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RHAND_b2">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RHAND_b2_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran33">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RHAND_b3">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RHAND_b3_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran34">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RHAND_c1">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RHAND_c1_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran35">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RHAND_c2">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RHAND_c2_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran36">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RHAND_c3">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RHAND_c3_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <!--End Transmission-->
+
+
+  <!-- Wheels -->
+  <!-- in kg-->
+  <!-- Defining the colors used in this robot -->
+  <material name="Black">
+    <color rgba="0.0 0.0 0.0 1.0"/>
+  </material>
+  <material name="Red">
+    <color rgba="0.8 0.0 0.0 1.0"/>
+  </material>
+  <material name="White">
+    <color rgba="1.0 1.0 1.0 1.0"/>
+  </material>
+  <material name="Blue">
+    <color rgba="0.0 0.0 0.8 1.0"/>
+  </material>
+
+
+
+  <link name="base_footprint">
+    <inertial>
+      <mass value="0.0001"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <gazebo reference="base_footprint">
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <joint name="base_footprint_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0.04"/>
+    <parent link="base_footprint"/>
+    <child link="Body_WHBase_plate_link"/>
+  </joint>
+
+
+  <!--BODY TORSO-->
+  <joint name="WHBASE" type="revolute">
+    <origin
+      xyz="0 0 0.678"
+      rpy="0 0 0" />
+    <parent
+      link="Body_WHBase_link" />
+    <child
+      link="Body_TORSO" />
+    <axis
+      xyz="0 0 1" />
+    <limit effort="100000" velocity="100" lower="-3.14" upper="3.14" />
+    <dynamics damping="30" friction="5" />
+  </joint>
+
+  <link name="Body_TORSO">
+    <inertial>
+      <origin
+        xyz="0.000373 0.000832 0.360257"
+        rpy="0 0 0" />
+      <mass
+        value="18.236" />
+      <inertia
+        ixx="0.19794"
+        ixy="6.4e-05"
+        ixz="-0.001125"
+        iyy="0.155811"
+        iyz="0.000284"
+        izz="0.117584" />
+    </inertial>
+    <visual>
+      <origin
+
+        xyz="0 0 -0.203"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_TORSO.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 -0.203"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_TORSO_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+<!-- LEFT ARM -->
+<!-- LEFT ARM -->
+<!-- LEFT ARM -->
+  <joint name="LSP" type="revolute">
+    <origin
+      xyz="0 0.242 0.253"
+      rpy="0 -0 0" />
+    <parent
+      link="Body_TORSO" />
+    <child
+      link="Body_LSP" />
+    <axis
+      xyz="0 1 0" />
+    <limit effort="100" velocity="1.0" lower="-5" upper="5" />
+    <dynamics damping="5" friction="5" />
+  </joint>
+
+  <link name="Body_LSP">
+    <inertial>
+      <origin
+        xyz="0.015596 -0.052409 0"
+        rpy="0 0 0" />
+      <mass
+        value="1.6" />
+      <inertia
+        ixx="0.005195"
+        ixy="0.001333"
+        ixz="1e-08"
+        iyy="0.004409"
+        iyz="0"
+        izz="0.007234" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LSP.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LSP_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+ <joint name="LSR" type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="Body_LSP" />
+    <child
+      link="Body_LSR" />
+    <axis
+      xyz="1 0 0" />
+    <limit effort="100" velocity="1.0" lower="-5" upper="5" />
+    <dynamics damping="5" friction="5" />
+  </joint>
+
+  <link name="Body_LSR">
+    <inertial>
+      <origin
+        xyz="-0.003104 0.000106 -0.013013"
+        rpy="0 0 0" />
+      <mass
+        value="1.427" />
+      <inertia
+        ixx="0.003163"
+        ixy="6e-06"
+        ixz="-0.000211"
+        iyy="0.003689"
+        iyz="0"
+        izz="0.001909" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LSR.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LSR_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="LSY" type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="Body_LSR" />
+    <child
+      link="Body_LSY" />
+    <axis
+      xyz="0 0 1" />
+    <limit effort="100" velocity="1.0" lower="-5" upper="5" />
+    <dynamics damping="5" friction="5" />
+  </joint>
+
+  <link name="Body_LSY">
+    <inertial>
+      <origin
+        xyz="0.035284 -0.242 -0.87969"
+        rpy="0 0 0" />
+      <mass
+        value="0.95687" />
+      <inertia
+        ixx="0.06681"
+        ixy="-3.173E-08"
+        ixz="-0.0029038"
+        iyy="0.034452"
+        iyz="1.0171E-05"
+        izz="0.03448" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LSY.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LSY_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="LEB" type="revolute">
+    <origin
+      xyz="0.035 0 -0.350"
+      rpy="0 0 0" />
+    <parent
+      link="Body_LSY" />
+    <child
+      link="Body_LEB" />
+    <axis
+      xyz="0 1 0" />
+    <limit effort="100" velocity="1.0" lower="-5" upper="5" />
+    <dynamics damping="5" friction="5" />
+  </joint>
+
+  <link name="Body_LEB">
+    <inertial>
+      <origin
+        xyz="-0.019775 0.004924 -0.041836"
+        rpy="0 0 0" />
+      <mass
+        value="0.409464" />
+      <inertia
+        ixx="0.001031"
+        ixy="4e-05"
+        ixz="0.000277"
+        iyy="0.001163"
+        iyz="8.5e-05"
+        izz="0.00056" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LEB.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LEB_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="LWY" type="revolute">
+    <origin
+      xyz="-0.035 0 -0.34"
+      rpy="0 0 0" />
+    <parent
+      link="Body_LEB" />
+    <child
+      link="Body_LWY" />
+    <axis
+      xyz="0 0 1" />
+    <limit effort="100" velocity="1.0" lower="-5" upper="5" />
+    <dynamics damping="5" friction="5" />
+  </joint>
+
+  <link name="Body_LWY">
+    <inertial>
+      <origin
+        xyz="5.4e-05 0.001779 0.134651"
+        rpy="0 0 0" />
+      <mass
+        value="1.47" />
+      <inertia
+        ixx="0.01302"
+        ixy="-1e-05"
+        ixz="4e-5"
+        iyy="0.012803"
+        iyz="-0.000388"
+        izz="0.000862" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LWY.STL" />
+      </geometry>
+      <material
+        name="">
+        <color rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LWY_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="LWP" type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="Body_LWY" />
+    <child
+      link="Body_LWP" />
+    <axis
+      xyz="0 1 0" />
+    <limit effort="100" velocity="1.0" lower="-5" upper="5" />
+    <dynamics damping="5" friction="5" />
+  </joint>
+
+  <link name="Body_LWP">
+    <inertial>
+      <origin
+        xyz="1.7e-05 0.011876 -0.003359"
+        rpy="0 0 0" />
+      <mass
+        value="0.158865" />
+      <inertia
+        ixx="7.2e-04"
+        ixy="1e-06"
+        ixz="1e-06"
+        iyy="6.5e-04"
+        iyz="6e-05"
+        izz="6.5e-04" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LWP.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LWP_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+<!--  <joint name="LWFT" type="prismatic">
+    <origin
+      xyz="0 0 -0.0326"
+      rpy="0 0 0" />
+    <parent
+      link="Body_LWP" />
+    <child
+      link="Body_LWFT" />
+    <axis
+      xyz="0 0 1" />
+    <limit effort="1000000" velocity="1.0" lower="-0" upper="0" />
+    <dynamics damping="1" friction="1" />
+  </joint>
+-->
+  <joint name="LWFT" type="fixed">
+    <origin
+      xyz="0 0 -0.0326"
+      rpy="0 0 0" />
+    <parent
+      link="Body_LWP" />
+    <child
+      link="Body_LWFT" />
+  </joint>
+
+  <link name="Body_LWFT">
+    <inertial>
+      <origin
+        xyz="-1.2e-05 -3e-06 -0.017752"
+        rpy="0 0 0" />
+      <mass
+        value="0.016659" />
+      <inertia
+        ixx="2e-05"
+        ixy="1e-06"
+        ixz="1e-06"
+        iyy="1.85e-05"
+        iyz="1e-06"
+        izz="3.33e-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LWFT.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LWFT_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+  <joint name="LWY2" type="revolute">
+    <origin
+      xyz="0 0 0.0326"
+      rpy="0 0 0" />
+    <parent
+      link="Body_LWFT" />
+    <child
+      link="Body_LF1" />
+    <axis
+      xyz="0 0 1" />
+    <limit effort="100" velocity="100.0" lower="-5" upper="5" />
+    <dynamics damping="0.1" friction="1" />
+  </joint>
+
+
+  <link name = "Body_LF1">
+   <inertial>
+      <origin
+        xyz="0.00350179 0.00500094 -0.108683" rpy="0 0 0" />
+      <mass value="0.894667" />
+      <inertia
+        ixx="0.00087045"
+        ixy="-1.448e-05"
+        ixz="-1.064e-05"
+        iyy="0.00103972"
+        iyz="-7.89e-06"
+        izz="0.00095329" />
+    </inertial>
+    <visual> 
+      <origin
+        xyz="0 0 0.0" rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LF1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LF1_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+<!-- LEFT HAND -->
+<!-- LEFT HAND -->
+<!-- LEFT HAND -->
+  <joint name="LHAND_a1" type="revolute">
+    <origin
+      xyz="0.02498 -0.023 -0.1471"
+      rpy="0 0 0" />
+    <parent
+      link="Body_LF1" />
+    <child
+      link="Body_LF2_a1" />
+    <axis
+      xyz="0 1 0" />
+    <limit effort="100000" velocity="1.0" lower="0" upper="1.4708" />
+    <dynamics damping="0.0003" friction="0.1" />
+  </joint>
+
+  <link name="Body_LF2_a1">
+    <inertial>
+      <origin
+        xyz="-0.0228526 -0.00016373 -0.0095261"
+        rpy="0 0 0" />
+      <mass
+        value="0.038683" />
+      <inertia
+        ixx="1.143e-04"
+        ixy="7e-06"
+        ixz="-6.53e-05"
+        iyy="2.17e-04"
+        iyz="-1e-05"
+        izz="1.314e-04" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LF2_a1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LF2_a1_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="LHAND_a2" type="revolute">
+    <origin
+      xyz="0.03889 0 -0.0388"
+      rpy="0 0.7854 0" />
+    <parent
+      link="Body_LF2_a1" />
+    <child
+      link="Body_LF2_a2" />
+    <axis
+      xyz="0 1 0" />
+    <limit effort="100000" velocity="1.0" lower="0" upper="1.4708" />
+    <dynamics damping="0.0003" friction="0.1" />
+  </joint>
+
+  <link name="Body_LF2_a2">
+    <inertial>
+      <origin
+        xyz="0.0183473 -5.73e-06 0.00742064"
+        rpy="0 0 0" />
+      <mass
+        value="0.021949" />
+      <inertia
+        ixx="2.31e-05"
+        ixy="9e-06"
+        ixz="-4.6e-06"
+        iyy="7.09e-05"
+        iyz="-5e-06"
+        izz="6.69e-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LF2_a2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LF2_a3_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="LHAND_a3" type="revolute">
+    <origin
+      xyz="0.04 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="Body_LF2_a2" />
+    <child
+      link="Body_LF2_a3" />
+    <axis
+      xyz="0 1 0" />
+    <limit effort="100000" velocity="1.0" lower="0" upper="1.4708" />
+    <dynamics damping="0.0003" friction="0.1" />
+  </joint>
+
+  <link name="Body_LF2_a3">
+    <inertial>
+      <origin
+        xyz="0.00112468 -3.724e-05 0.00681838"
+        rpy="0 0 0" />
+      <mass
+        value="0.0115" />
+      <inertia
+        ixx="7.2e-05"
+        ixy="1e-06"
+        ixz="2.9e-05"
+        iyy="1.67e-05"
+        iyz="1e-06"
+        izz="1.84e-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LF2_a3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RF2_a3_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+  <joint name="LHAND_b1" type="revolute">
+    <origin
+      xyz="0.02498 0.0232 -0.1471"
+      rpy="0 0 0" />
+    <parent
+      link="Body_LF1" />
+    <child
+      link="Body_LF2_b1" />
+    <axis
+      xyz="0 1 0" />
+    <limit effort="100000" velocity="1.0" lower="0" upper="1.4708" />
+    <dynamics damping="0.0003" friction="0.1" />
+  </joint>
+
+  <link name="Body_LF2_b1">
+    <inertial>
+      <origin
+        xyz="-0.0228526 -0.00016373 -0.0095261"
+        rpy="0 0 0" />
+      <mass
+        value="0.038683" />
+      <inertia
+        ixx="1.143e-04"
+        ixy="7e-06"
+        ixz="-6.53e-05"
+        iyy="2.17e-04"
+        iyz="-1e-05"
+        izz="1.314e-04" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LF2_b1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LF2_b1_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="LHAND_b2" type="revolute">
+    <origin
+      xyz="0.03889 0 -0.0388"
+      rpy="0 0.7854 0" />
+    <parent
+      link="Body_LF2_b1" />
+    <child
+      link="Body_LF2_b2" />
+    <axis
+      xyz="0 1 0" />
+    <limit effort="100000" velocity="1.0" lower="0" upper="1.4708" />
+    <dynamics damping="0.0003" friction="0.1" />
+  </joint>
+
+  <link name="Body_LF2_b2">
+    <inertial>
+      <origin
+        xyz="0.0183473 -5.73e-06 0.00742064"
+        rpy="0 0 0" />
+      <mass
+        value="0.021949" />
+      <inertia
+        ixx="2.31e-05"
+        ixy="9e-06"
+        ixz="-4.6e-06"
+        iyy="7.09e-05"
+        iyz="-5e-06"
+        izz="6.69e-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LF2_b2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LF2_b2_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="LHAND_b3" type="revolute">
+    <origin
+      xyz="0.04 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="Body_LF2_b2" />
+    <child
+      link="Body_LF2_b3" />
+    <axis
+      xyz="0 1 0" />
+    <limit effort="100000" velocity="1.0" lower="0" upper="1.4708" />
+    <dynamics damping="0.0003" friction="0.1" />
+  </joint>
+
+  <link name="Body_LF2_b3">
+    <inertial>
+      <origin
+        xyz="0.00112468 -3.724e-05 0.00681838"
+        rpy="0 0 0" />
+      <mass
+        value="0.0115" />
+      <inertia
+        ixx="7.2e-05"
+        ixy="1e-06"
+        ixz="2.9e-05"
+        iyy="1.67e-05"
+        iyz="1e-06"
+        izz="1.84e-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LF2_b3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LF2_b3_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+  <joint name="LHAND_c1" type="revolute">
+    <origin
+      xyz="-0.02502 0 -0.1471"
+      rpy="0 0 0" />
+    <parent
+      link="Body_LF1" />
+    <child
+      link="Body_LF2_c1" />
+    <axis
+      xyz="0 -1 0" />
+    <limit effort="100000" velocity="1.0" lower="0" upper="1.4708" />
+    <dynamics damping="0.0003" friction="0.1" />
+  </joint>
+
+  <link name="Body_LF2_c1">
+    <inertial>
+      <origin
+        xyz="-0.0228526 0.00016373 -0.0095261"
+        rpy="0 0 0" />
+      <mass
+        value="0.038683" />
+      <inertia
+        ixx="1.143e-04"
+        ixy="7e-06"
+        ixz="-6.53e-05"
+        iyy="2.17e-04"
+        iyz="-1e-05"
+        izz="1.314e-04" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LF2_c1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LF2_c1_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="LHAND_c2" type="revolute">
+    <origin
+      xyz="-0.03889 0 -0.0388"
+      rpy="0 -0.7854 0" />
+    <parent
+      link="Body_LF2_c1" />
+    <child
+      link="Body_LF2_c2" />
+    <axis
+      xyz="0 -1 0" />
+    <limit effort="100000" velocity="1.0" lower="0" upper="1.4708" />
+    <dynamics damping="0.0003" friction="0.1" />
+  </joint>
+
+  <link name="Body_LF2_c2">
+    <inertial>
+      <origin
+        xyz="-0.0183473 5.73e-06 0.00742064"
+        rpy="0 0 0" />
+      <mass
+        value="0.021949" />
+      <inertia
+        ixx="2.31e-05"
+        ixy="9e-06"
+        ixz="-4.6e-06"
+        iyy="7.09e-05"
+        iyz="-5e-06"
+        izz="6.69e-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LF2_c2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LF2_c2_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="LHAND_c3" type="revolute">
+    <origin
+      xyz="-0.04 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="Body_LF2_c2" />
+    <child
+      link="Body_LF2_c3" />
+    <axis
+      xyz="0 -1 0" />
+    <limit effort="100000" velocity="1.0" lower="0" upper="1.4708" />
+    <dynamics damping="0.0003" friction="0.1" />
+  </joint>
+
+  <link name="Body_LF2_c3">
+    <inertial>
+      <origin
+        xyz="-0.00112468 3.724e-05 0.00681838"
+        rpy="0 0 0" />
+      <mass
+        value="0.0115" />
+      <inertia
+        ixx="7.2e-05"
+        ixy="1e-06"
+        ixz="2.9e-05"
+        iyy="1.67e-05"
+        iyz="1e-06"
+        izz="1.84e-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LF2_c3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_LF2_c3_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+<!-- RIGHT ARM -->
+<!-- RIGHT ARM -->
+<!-- RIGHT ARM -->
+  <joint name="RSP" type="revolute">
+    <origin
+      xyz="0 -0.242 0.253"
+      rpy="0 0 0" />
+    <parent
+      link="Body_TORSO" />
+    <child
+      link="Body_RSP" />
+    <axis
+      xyz="0 1 0" />
+    <limit effort="100" velocity="1.0" lower="-5" upper="5" />
+    <dynamics damping="200" friction="200" />
+  </joint>
+
+  <link name="Body_RSP">
+    <inertial>
+      <origin
+        xyz="0.015596 0.052409 0"
+        rpy="0 0 0" />
+      <mass
+        value="1.6" />
+      <inertia
+        ixx="0.005195"
+        ixy="-0.001333"
+        ixz="1e-08"
+        iyy="0.004409"
+        iyz="-1e-08"
+        izz="0.007234" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RSP.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RSP_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="RSR" type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="Body_RSP" />
+    <child
+      link="Body_RSR" />
+    <axis
+      xyz="1 0 0" />
+    <limit effort="100" velocity="1.0" lower="-5" upper="5" />
+    <dynamics damping="200" friction="200" />
+  </joint>
+
+  <link name="Body_RSR">
+    <inertial>
+      <origin
+        xyz="-0.003104 -0.000106 -0.013013"
+        rpy="0 0 0" />
+      <mass
+        value="1.427" />
+      <inertia
+        ixx="0.003163"
+        ixy="-6e-06"
+        ixz="-0.000211"
+        iyy="0.003689"
+        iyz="-1e-08"
+        izz="0.001909" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RSR.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RSR_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="RSY"
+    type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="Body_RSR" />
+    <child
+      link="Body_RSY" />
+    <axis
+      xyz="0 0 1" />
+    <limit effort="100" velocity="1.0" lower="-5" upper="5" />
+    <dynamics damping="200" friction="200" />
+  </joint>
+
+  <link name="Body_RSY">
+    <inertial>
+      <origin
+        xyz="0.035284 0.242 -0.87969"
+        rpy="0 0 0" />
+      <mass
+        value="0.95687" />
+      <inertia
+        ixx="0.06681"
+        ixy="-3.173E-08"
+        ixz="-0.0029038"
+        iyy="0.034452"
+        iyz="1.0171E-05"
+        izz="0.03448" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RSY.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RSY_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="REB" type="revolute">
+    <origin
+      xyz="0.035 0 -0.35"
+      rpy="0 0 0" />
+    <parent
+      link="Body_RSY" />
+    <child
+      link="Body_REB" />
+    <axis
+      xyz="0 1 0" />
+    <limit effort="100" velocity="1.0" lower="-5" upper="5" />
+    <dynamics damping="200" friction="200" />
+  </joint>
+
+  <link name="Body_REB">
+    <inertial>
+      <origin
+        xyz="-0.019775 -0.004924 -0.041836"
+        rpy="0 0 0" />
+      <mass
+        value="0.409464" />
+      <inertia
+        ixx="0.001031"
+        ixy="-4e-05"
+        ixz="0.000277"
+        iyy="0.001163"
+        iyz="-8.5e-05"
+        izz="0.00056" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_REB.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_REB_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="RWY" type="revolute">
+    <origin
+      xyz="-0.035 0 -0.34"
+      rpy="0 0 0" />
+    <parent
+      link="Body_REB" />
+    <child
+      link="Body_RWY" />
+    <axis
+      xyz="0 0 1" />
+    <limit effort="100" velocity="1.0" lower="-5" upper="5" />
+    <dynamics damping="200" friction="200" />
+  </joint>
+
+  <link name="Body_RWY">
+    <inertial>
+      <origin
+        xyz="5.4e-05 -0.001779 0.134651"
+        rpy="0 0 0" />
+      <mass
+        value="1.47" />
+      <inertia
+        ixx="0.01302"
+        ixy="1e-05"
+        ixz="4e-05"
+        iyy="0.012803"
+        iyz="0.000388"
+        izz="0.000862" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RWY.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RWY_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="RWP" type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="Body_RWY" />
+    <child
+      link="Body_RWP" />
+    <axis
+      xyz="0 1 0" />
+    <limit effort="100" velocity="1.0" lower="-5" upper="5" />
+    <dynamics damping="200" friction="200" />
+  </joint>
+
+  <link name="Body_RWP">
+    <inertial>
+      <origin
+        xyz="1.7e-05 -0.011876 -0.003359"
+        rpy="0 0 0" />
+      <mass
+        value="0.158865" />
+      <inertia
+        ixx="7.2e-04"
+        ixy="-1e-06"
+        ixz="1e-06"
+        iyy="6.5e-04"
+        iyz="-6e-05"
+        izz="6.5e-04" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RWP.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RWP_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+<!--
+  <joint name="RWFT" type="prismatic">
+    <origin
+      xyz="0 0 -0.0326"
+      rpy="0 0 0" />
+    <parent
+      link="Body_RWP" />
+    <child
+      link="Body_RWFT" />
+    <axis
+      xyz="0 0 1" />
+    <limit effort="1000000" velocity="1.0" lower="-0" upper="0" />
+    <dynamics damping="1" friction="1" />
+  </joint>
+-->
+
+  <joint name="RWFT" type="fixed">
+    <origin xyz="0 0 -0.0326"
+      rpy="0 0 0" />
+    <parent link="Body_RWP" />
+    <child link="Body_RWFT" />
+  </joint>
+
+
+
+  <link name="Body_RWFT">
+    <inertial>
+      <origin
+        xyz="-1.2e-05 3e-06 -0.017752"
+        rpy="0 0 0" />
+      <mass
+        value="0.016659" />
+      <inertia
+        ixx="2e-05"
+        ixy="-1e-06"
+        ixz="1e-06"
+        iyy="1.85e-05"
+        iyz="-1e-06"
+        izz="3.33e-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 -0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RWFT.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 -0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RWFT_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+
+  <joint name="RWY2" type="revolute">
+    <origin
+      xyz="0 0 0.0326"
+      rpy="0 0 0" />
+    <parent
+      link="Body_RWFT" />
+    <child
+      link="Body_RF1" />
+    <axis
+      xyz="0 0 1" />
+    <limit effort="100" velocity="100.0" lower="-5" upper="5" />
+    <dynamics damping="0.1" friction="1" />
+  </joint>
+
+  <link name="Body_RF1">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 -0 0" />
+      <mass value="0.894667" />
+      <inertia
+        ixx="0.00087045"
+        ixy="1.448e-05"
+        ixz="-1.064e-05"
+        iyy="0.00103972"
+        iyz="7.89e-06"
+        izz="0.00095329" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RF1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RF1_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+<!-- RIGHT HAND -->
+<!-- RIGHT HAND -->
+<!-- RIGHT HAND -->
+  <joint name="RHAND_a1" type="revolute">
+    <origin
+      xyz="0.02498 -0.0232 -0.1471"
+      rpy="0 0 0" />
+    <parent
+      link="Body_RF1" />
+    <child
+      link="Body_RF2_a1" />
+    <axis
+      xyz="0 1 0" />
+    <limit effort="100000" velocity="1.0" lower="0" upper="1.4708" />
+    <dynamics damping="0.0003" friction="0.1" />
+  </joint>
+
+  <link name="Body_RF2_a1">
+    <inertial>
+      <origin
+        xyz="-0.0228526 -0.00016373 -0.0095261"
+        rpy="0 0 0" />
+      <mass
+        value="0.038683" />
+      <inertia
+        ixx="1.143e-04"
+        ixy="7e-06"
+        ixz="-6.53e-05"
+        iyy="2.17e-04"
+        iyz="-1e-05"
+        izz="1.314e-04" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RF2_a1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RF2_a1_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="RHAND_a2" type="revolute">
+    <origin
+      xyz="0.03889 0 -0.0388"
+      rpy="0 0.7854 0" />
+    <parent
+      link="Body_RF2_a1" />
+    <child
+      link="Body_RF2_a2" />
+    <axis
+      xyz="0 1 0" />
+    <limit effort="100000" velocity="1.0" lower="0" upper="1.4708" />
+    <dynamics damping="0.0003" friction="0.1" />
+  </joint>
+
+  <link name="Body_RF2_a2">
+    <inertial>
+      <origin
+        xyz="0.0183473 -5.73e-06 0.00742064"
+        rpy="0 0 0" />
+      <mass
+        value="0.021949" />
+      <inertia
+        ixx="2.31e-05"
+        ixy="9e-06"
+        ixz="-4.6e-06"
+        iyy="7.09e-05"
+        iyz="-5e-06"
+        izz="6.69e-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RF2_a2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RF2_a2_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="RHAND_a3" type="revolute">
+    <origin
+      xyz="0.04 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="Body_RF2_a2" />
+    <child
+      link="Body_RF2_a3" />
+    <axis
+      xyz="0 1 0" />
+    <limit effort="100000" velocity="1.0" lower="0" upper="1.4708" />
+    <dynamics damping="0.0003" friction="0.1" />
+  </joint>
+
+  <link name="Body_RF2_a3">
+    <inertial>
+      <origin
+        xyz="0.00112468 -3.724e-05 0.00681838"
+        rpy="0 0 0" />
+      <mass
+        value="0.0115" />
+      <inertia
+        ixx="7.2e-05"
+        ixy="1e-06"
+        ixz="2.9e-05"
+        iyy="1.67e-05"
+        iyz="1e-06"
+        izz="1.84e-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RF2_a3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RF2_a3_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+  <joint name="RHAND_b1" type="revolute">
+    <origin
+      xyz="0.02498 0.023 -0.1471"
+      rpy="0 0 0" />
+    <parent
+      link="Body_RF1" />
+    <child
+      link="Body_RF2_b1" />
+    <axis
+      xyz="0 1 0" />
+    <limit effort="100000" velocity="1.0" lower="0" upper="1.4708" />
+    <dynamics damping="0.0003" friction="0.1" />
+  </joint>
+
+  <link name="Body_RF2_b1">
+    <inertial>
+      <origin
+        xyz="-0.0228526 -0.00016373 -0.0095261"
+        rpy="0 0 0" />
+      <mass
+        value="0.038683" />
+      <inertia
+        ixx="1.143e-04"
+        ixy="7e-06"
+        ixz="-6.53e-05"
+        iyy="2.17e-04"
+        iyz="-1e-05"
+        izz="1.314e-04" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RF2_b1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RF2_b1_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="RHAND_b2" type="revolute">
+    <origin
+      xyz="0.03889 0 -0.0388"
+      rpy="0 0.7854 0" />
+    <parent
+      link="Body_RF2_b1" />
+    <child
+      link="Body_RF2_b2" />
+    <axis
+      xyz="0 1 0" />
+    <limit effort="100000" velocity="1.0" lower="0" upper="1.4708" />
+    <dynamics damping="0.0003" friction="0.1" />
+  </joint>
+
+  <link name="Body_RF2_b2">
+    <inertial>
+      <origin
+        xyz="0.0183473 -5.73e-06 0.00742064"
+        rpy="0 0 0" />
+      <mass
+        value="0.021949" />
+      <inertia
+        ixx="2.31e-05"
+        ixy="9e-06"
+        ixz="-4.6e-06"
+        iyy="7.09e-05"
+        iyz="-5e-06"
+        izz="6.69e-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RF2_b2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RF2_b2_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="RHAND_b3" type="revolute">
+    <origin
+      xyz="0.04 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="Body_RF2_b2" />
+    <child
+      link="Body_RF2_b3" />
+    <axis
+      xyz="0 1 0" />
+    <limit effort="100000" velocity="1.0" lower="0" upper="1.4708" />
+    <dynamics damping="0.0003" friction="0.1" />
+  </joint>
+
+  <link name="Body_RF2_b3">
+    <inertial>
+      <origin
+        xyz="0.00112468 -3.724e-05 0.00681838"
+        rpy="0 0 0" />
+      <mass
+        value="0.0115" />
+      <inertia
+        ixx="7.2e-05"
+        ixy="1e-06"
+        ixz="2.9e-05"
+        iyy="1.67e-05"
+        iyz="1e-06"
+        izz="1.84e-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RF2_b3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RF2_b3_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+  <joint name="RHAND_c1" type="revolute">
+    <origin
+      xyz="-0.02502 0 -0.1471"
+      rpy="0 0 0 " />
+    <parent
+      link="Body_RF1" />
+    <child
+      link="Body_RF2_c1" />
+    <axis
+      xyz="0 -1 0" />
+    <limit effort="100000" velocity="1.0" lower="0" upper="1.4708" />
+    <dynamics damping="0.0003" friction="0.1" />
+  </joint>
+
+  <link name="Body_RF2_c1">
+    <inertial>
+      <origin
+        xyz="-0.0228526 0.00016373 -0.0095261"
+        rpy="0 0 0" />
+      <mass
+        value="0.038683" />
+      <inertia
+        ixx="1.143e-04"
+        ixy="7e-06"
+        ixz="-6.53e-05"
+        iyy="2.17e-04"
+        iyz="-1e-05"
+        izz="1.314e-04" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RF2_c1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RF2_c1_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="RHAND_c2" type="revolute">
+    <origin
+      xyz="-0.03889 0 -0.0388"
+      rpy="0 -0.7854 0" />
+    <parent
+      link="Body_RF2_c1" />
+    <child
+      link="Body_RF2_c2" />
+    <axis
+      xyz="0 -1 0" />
+    <limit effort="100000" velocity="1.0" lower="0" upper="1.4708" />
+    <dynamics damping="0.0003" friction="0.1" />
+  </joint>
+
+  <link name="Body_RF2_c2">
+    <inertial>
+      <origin
+        xyz="-0.0183473 5.73e-06 0.00742064"
+        rpy="0 0 0" />
+      <mass
+        value="0.021949" />
+      <inertia
+        ixx="2.31e-05"
+        ixy="9e-06"
+        ixz="-4.6e-06"
+        iyy="7.09e-05"
+        iyz="-5e-06"
+        izz="6.69e-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RF2_c2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RF2_c2_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="RHAND_c3" type="revolute">
+    <origin
+      xyz="-0.04 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="Body_RF2_c2" />
+    <child
+      link="Body_RF2_c3" />
+    <axis
+      xyz="0 -1 0" />
+    <limit effort="100000" velocity="1.0" lower="0" upper="1.4708" />
+    <dynamics damping="0.0003" friction="0.1" />
+  </joint>
+
+  <link name="Body_RF2_c3">
+    <inertial>
+      <origin
+        xyz="-0.00112468 3.724e-05 0.00681838"
+        rpy="0 0 0" />
+      <mass
+        value="0.0115" />
+      <inertia
+        ixx="7.2e-05"
+        ixy="1e-06"
+        ixz="2.9e-05"
+        iyy="1.67e-05"
+        iyz="1e-06"
+        izz="1.84e-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RF2_c3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Body_RF2_c3_col.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+
+
+
+
+
+
+
+  <!--======================= Base ========================-->
+  <!--======================= Base ========================-->
+  <!--======================= Base ========================-->
+
+  <!-- Body WHBase Link -->
+  <link name="Body_WHBase_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size ="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="Body_WHBASE.STL"/>
+      </geometry>      
+      <material name="">
+        <color rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0.339" rpy="0 0 0"/>
+      <mass value="54.5"/>
+      <inertia ixx="-0.07"
+               ixy="0"
+               ixz="1"
+               iyy="0.97"
+               iyz="0.02"
+               izz="-0.06"/>
+    </inertial>
+  </link>
+
+  <!--Body_WHBASE_plate-->
+  <joint name="WHBASE_plate" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="Body_WHBase_plate_link" />
+    <child link="Body_WHBase_link" />
+  </joint> 
+
+  <link name="Body_WHBase_plate_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="5.82442"/>
+      <inertia ixx="0.31925463177"
+               ixy="0.23410133970"
+               ixz="-0.0087409920"
+               iyy="0.31000869063"
+               iyz="-0.00877746496"
+               izz="-0.62838935097"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="Body_WHBASE_plate.STL"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0 " xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.02" radius="0.15"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <gazebo reference="Body_WHBase_plate_link">
+    <material>Gazebo/White</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <link name="Body_RWH_link">
+    <visual>
+      <origin rpy="0 0 0 " xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="Body_RWH_mobile.STL"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="1.57079632679 0 0 " xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.03" radius="0.075"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="2.5"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.00108333333333" ixy="0" ixz="0" iyy="0.00108333333333" iyz="0" izz="0.002"/>
+    </inertial>
+  </link>
+  <gazebo reference="Body_RWH_link">
+    <mu1 value="1.0"/>
+    <mu2 value="1.0"/>
+    <kp value="10000000.0"/>
+    <kd value="1.0"/>
+    <fdir1 value="1 0 0"/>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <joint name="whbase_to_rwh" type="continuous">
+    <parent link="Body_WHBase_plate_link"/>
+    <child link="Body_RWH_link"/>
+    <origin rpy="0 0 0" xyz="0.0 -0.2 -0.047"/>
+    <axis rpy="0  0" xyz="0 1 0"/>
+    <limit effort="100" velocity="100"/>
+    <joint_properties damping="0.0" friction="0.0"/>
+  </joint>
+
+  <!-- Transmission is important to link the joints and the controller -->
+<!--  <transmission name="whbase_to_rwh_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="whbase_to_rwh"/>
+    <actuator name="whbase_to_rwh_motor">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+-->
+  <link name="Body_LWH_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="Body_LWH_mobile.STL"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="1.57079632679 0 0 " xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.03" radius="0.075"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="2.5"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.00108333333333" ixy="0" ixz="0" iyy="0.00108333333333" iyz="0" izz="0.002"/>
+    </inertial>
+  </link>
+
+  <gazebo reference="Body_LWH_link">
+    <mu1 value="1.0"/>
+    <mu2 value="1.0"/>
+    <kp value="10000000.0"/>
+    <kd value="1.0"/>
+    <fdir1 value="1 0 0"/>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <joint name="whbase_to_lwh" type="continuous">
+    <parent link="Body_WHBase_plate_link"/>
+    <child link="Body_LWH_link"/>
+    <origin rpy="0 0 0" xyz="0.0 0.2 -0.047"/>
+    <axis rpy="0  0" xyz="0 1 0"/>
+    <limit effort="100" velocity="100"/>
+    <joint_properties damping="0.0" friction="0.0"/>
+  </joint>
+
+  <!-- Transmission is important to link the joints and the controller -->
+<!--  <transmission name="whbase_to_lwh_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="whbase_to_lwh"/>
+    <actuator name="whbase_to_lwh_motor">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>-->
+
+
+  <!-- Body Caster1 Link -->
+  <link name="Body_Caster1_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size ="0.001 0.001 0.001"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0</mu>
+            <mu2>0</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="Body_WHBASE_caster1.STL"/>
+      </geometry>      
+      <material name="">
+        <color rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0.02" rpy="0 0 0"/>
+      <mass value="0.0470917"/>
+      <inertia ixx="0.0001"
+               ixy="0"
+               ixz="0"
+               iyy="0.0001"
+               iyz="0"
+               izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <joint name="whbase_to_caster1" type="continuous">
+    <parent link="Body_WHBase_plate_link"/>
+    <child link="Body_Caster1_link"/>
+    <origin xyz="0.2 0.08 -0.096" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="0.1"/>
+  </joint>
+
+  <!-- Body Caster2 Link -->
+  <link name="Body_Caster2_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size ="0.001 0.001 0.001"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0</mu>
+            <mu2>0</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="Body_WHBASE_caster2.STL"/>
+      </geometry>      
+      <material name="">
+        <color rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0.02" rpy="0 0 0"/>
+      <mass value="0.0470917"/>
+      <inertia ixx="0.0001"
+               ixy="0"
+               ixz="0"
+               iyy="0.0001"
+               iyz="0"
+               izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <joint name="whbase_to_caster2" type="continuous">
+    <parent link="Body_WHBase_plate_link"/>
+    <child link="Body_Caster2_link"/>
+    <origin xyz="0.2 -0.08 -0.096" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="0.1"/>
+  </joint>
+
+  <!-- Body Caster3 Link -->
+  <link name="Body_Caster3_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size ="0.001 0.001 0.001"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0</mu>
+            <mu2>0</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="Body_WHBASE_caster3.STL"/>
+      </geometry>      
+      <material name="">
+        <color rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0.02" rpy="0 0 0"/>
+      <mass value="0.0470917"/>
+      <inertia ixx="0.0001"
+               ixy="0"
+               ixz="0"
+               iyy="0.0001"
+               iyz="0"
+               izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <joint name="whbase_to_caster3" type="continuous">
+    <parent link="Body_WHBase_plate_link"/>
+    <child link="Body_Caster3_link"/>
+    <origin xyz="-0.2 -0.08 -0.096" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="0.1"/>
+  </joint>
+
+  <!-- Body Caster4 Link -->
+  <link name="Body_Caster4_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size ="0.001 0.001 0.001"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0</mu>
+            <mu2>0</mu2>
+            <!--<slip1>1.0</slip1>
+            <slip2>1.0</slip2>-->
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="Body_WHBASE_caster4.STL"/>
+      </geometry>      
+      <material name="">
+        <color rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0.02" rpy="0 0 0"/>
+      <mass value="0.0470917"/>
+      <inertia ixx="0.0001"
+               ixy="0"
+               ixz="0"
+               iyy="0.0001"
+               iyz="0"
+               izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <joint name="whbase_to_caster4" type="continuous">
+    <parent link="Body_WHBase_plate_link"/>
+    <child link="Body_Caster4_link"/>
+    <origin xyz="-0.2 0.08 -0.096" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="0.1"/>
+  </joint>
+
+  <!-- Body CasterWheel1 Link -->
+  <link name="Body_CasterWheel1_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="1.570796 0 0"/>
+      <geometry>
+        <cylinder length="0.015" radius="0.025"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0</mu>
+            <mu2>0</mu2>
+            <!--<slip1>1.0</slip1>
+            <slip2>1.0</slip2>-->
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="Body_WHBASE_casterwheel1.STL"/>
+      </geometry>      
+      <material name="">
+        <color rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.07657"/>
+      <inertia ixx="5.72e-04"
+               ixy="0"
+               ixz="0"
+               iyy="9.58e-04"
+               iyz="0"
+               izz="5.72e-04"/>
+    </inertial>
+  </link>
+
+  <joint name="caster1_to_casterwheel1" type="continuous">
+    <parent link="Body_Caster1_link"/>
+    <child link="Body_CasterWheel1_link"/>
+    <origin xyz="-0.0175 0 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.7"/>
+  </joint>
+
+  <!-- Body CasterWheel2 Link -->
+  <link name="Body_CasterWheel2_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="1.570796 0 0"/>
+      <geometry>
+        <cylinder length="0.015" radius="0.025"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0</mu>
+            <mu2>0</mu2>
+            <!--<slip1>1.0</slip1>
+            <slip2>1.0</slip2>-->
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="Body_WHBASE_casterwheel2.STL"/>
+      </geometry>      
+      <material name="">
+        <color rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.07657"/>
+      <inertia ixx="5.72e-04"
+               ixy="0"
+               ixz="0"
+               iyy="9.58e-04"
+               iyz="0"
+               izz="5.72e-04"/>
+    </inertial>
+  </link>
+
+  <joint name="caster2_to_casterwheel2" type="continuous">
+    <parent link="Body_Caster2_link"/>
+    <child link="Body_CasterWheel2_link"/>
+    <origin xyz="-0.0175 0 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.7"/>
+  </joint>
+
+  <!-- Body CasterWheel3 Link -->
+  <link name="Body_CasterWheel3_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="1.570796 0 0"/>
+      <geometry>
+        <cylinder length="0.015" radius="0.025"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0</mu>
+            <mu2>0</mu2>
+            <!--<slip1>1.0</slip1>
+            <slip2>1.0</slip2>-->
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="Body_WHBASE_casterwheel3.STL"/>
+      </geometry>      
+      <material name="">
+        <color rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.07657"/>
+      <inertia ixx="5.72e-04"
+               ixy="0"
+               ixz="0"
+               iyy="9.58e-04"
+               iyz="0"
+               izz="5.72e-04"/>
+    </inertial>
+  </link>
+
+  <joint name="caster3_to_casterwheel3" type="continuous">
+    <parent link="Body_Caster3_link"/>
+    <child link="Body_CasterWheel3_link"/>
+    <origin xyz="-0.0175 0 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.7"/>
+  </joint>
+
+  <!-- Body CasterWheel4 Link -->
+  <link name="Body_CasterWheel4_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="1.570796 0 0"/>
+      <geometry>
+        <cylinder length="0.015" radius="0.025"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0</mu>
+            <mu2>0</mu2>
+            <!--<slip1>1.0</slip1>
+            <slip2>1.0</slip2>-->
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="Body_WHBASE_casterwheel4.STL"/>
+      </geometry>      
+      <material name="">
+        <color rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.07657"/>
+      <inertia ixx="5.72e-04"
+               ixy="0"
+               ixz="0"
+               iyy="9.58e-04"
+               iyz="0"
+               izz="5.72e-04"/>
+    </inertial>
+  </link>
+
+  <joint name="caster4_to_casterwheel4" type="continuous">
+    <parent link="Body_Caster4_link"/>
+    <child link="Body_CasterWheel4_link"/>
+    <origin xyz="-0.0175 0 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.7"/>
+  </joint>
+
+
+
+<!--base move-->
+<!--  <joint name="joint1" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <parent link="base_footprint"/>
+    <child link="link1"/>
+  </joint>
+
+
+  <link name="link1">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.001" radius="0.01"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.001" radius="0.01"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="12"/>
+      <inertia ixx="0.18e0"
+               ixy="0"
+               ixz="0"
+               iyy="0.03e0"
+               iyz="0"
+               izz="0.18e0"/>
+    </inertial>
+  </link>
+
+  <joint name="joint2" type="continuous">
+    <origin rpy="0 0 0" xyz="0 0 0.0005"/>
+    <parent link="link1"/>
+    <child  link="link2"/>
+    <axis xyz = "0 0 1"/>
+  </joint>
+
+
+  <link name="link2">
+    <collision>
+      <origin xyz="0 0 0.0005" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.001" radius="0.001"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0.0005" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.001" radius="0.001"/>
+      </geometry>      
+      <material name="">
+        <color rgba="0 255 0 1" />
+      </material>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.0005e6"
+               ixy="0"
+               ixz="0"
+               iyy="0.00025e6"
+               iyz="0"
+               izz="0.0005e6"/>
+    </inertial>
+  </link>
+
+
+  <joint name = "joint3" type="prismatic">
+    <origin xyz = "0 0.001 0.0005" rpy ="0 0 0" />
+    <parent link = "link2" />
+    <child link = "link3" />
+    <axis xyz="0 1 0" />
+    <limit effort="100000" velocity="1.0" lower="-1000000" upper="1000000" />
+  </joint>
+
+  <link name="link3">
+    <collision>
+      <origin xyz="0 0.001 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.001" radius="0.001"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0.001 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.001" radius="0.001"/>
+      </geometry>      
+      <material name="">
+        <color rgba="0 0 255 1" />
+      </material>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.0005e6"
+               ixy="0"
+               ixz="0"
+               iyy="0.00025e6"
+               iyz="0"
+               izz="0.0005e6"/>
+    </inertial>
+  </link>
+
+
+  <joint name="joint4" type="continuous">
+    <origin rpy="0 0 0" xyz="0 0.001 0.13"/>
+    <parent link="link3"/>
+    <child  link="Body_WHBase_plate_link"/>
+    <axis xyz = "0 0 1"/>
+  </joint>
+-->
+ 
+ <!--base Transmission-->
+<!--
+  <transmission name="tran2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint2">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="joint2_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran3">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint3">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="joint3_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran4">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint4">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="joint4_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+-->
+
+<!--VISION HEAD-->
+<!--VISION HEAD-->
+<!--VISION HEAD-->
+
+  <joint name="Body_head_joint" type="fixed">
+    <axis xyz="0 0 1" />
+    <origin xyz="0 0 0.318" rpy="0 0 0"/>
+    <parent link="Body_TORSO"/>
+    <child link="Body_vision"/>
+  </joint>
+
+  <link name="Body_vision">
+    <collision>
+      <origin xyz="0.04419 0 0.054" rpy="0 0 0"/>
+      <geometry>
+	<mesh
+          filename="ASM_VISION.STL" />
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0.04419 0 0.054" rpy="0 0 0"/>
+      <geometry>
+	<mesh
+          filename="ASM_VISION.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+
+  <!-- realsenseD435 RGB-D camera -->
+  <joint name="Head_realsense_joint" type="fixed">
+    <axis xyz="0 0 1" />
+    <origin xyz="0.044 0 0.111" rpy="0 0.5235 0"/>
+    <parent link="Body_vision"/>
+    <child link="Head_realsense_camera"/>
+  </joint>
+  
+  <link name="Head_realsense_camera">
+  </link>
+  
+  <gazebo reference="Head_realsense_camera">
+    <sensor type="depth" name="realsense_camera">
+	  <origin xyz="0 0 0" rpy="0 0 0"/>
+      <camera name="realsense_camera">
+		  <update_rate>30.0</update_rate>
+        <horizontal_fov>1.047</horizontal_fov>
+        <image>
+          <width>640</width>
+          <height>480</height>
+          <format>RGB_INT8</format>
+        </image>
+        <clip>
+          <near>0.3</near>
+          <far>10</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+
+          <!-- Noise is sampled independently per pixel on each frame.
+               That pixel's noise value is added to each of its color
+               channels, which at that point lie in the range [0,1]. -->
+          <mean>0.0</mean>
+          <stddev>0.007</stddev>
+        </noise>
+      </camera>
+      
+      <plugin name="realsense_camera_controller" filename="libgazebo_ros_openni_kinect.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        
+        <cameraName>mobile_hubo/realsense_camera</cameraName>
+        <imageTopicName>realsense/rgb/image_raw</imageTopicName>
+        <cameraInfoTopicName>realsense/rgb/camera_info</cameraInfoTopicName>
+        <depthImageTopicName>realsense/depth/image_raw</depthImageTopicName>
+        <depthImageCameraInfoTopicName>realsense/depth/camera_info</depthImageCameraInfoTopicName>
+        <pointCloudTopicName>realsense/depth/points</pointCloudTopicName>
+            
+        <frameName>Head_realsense_camera</frameName>
+        <hackBaseline>0.07</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  
+  <!-- ZED RGB-D camera : roll is flipped upside-down-->
+  <!-- ZED RGB-D camera : origin xyz needs to be revised -->
+  <joint name="Head_zed_joint" type="fixed">
+    <axis xyz="0 0 1" />
+    <origin xyz="0.1 0 -0.028" rpy="3.14 0 0"/>
+    <parent link="Body_vision"/>
+    <child link="Head_zed_camera"/>
+  </joint>
+  
+  <link name="Head_zed_camera">
+  </link>
+  
+  <gazebo reference="Head_zed_camera">
+    <sensor type="depth" name="zed_camera">
+	  <pose frame="">0 0 0 0 0 0</pose>
+      <camera name="zed_camera">
+		  <update_rate>30.0</update_rate>
+        <horizontal_fov>0.87092</horizontal_fov>
+        <image>
+          <width>640</width>
+          <height>480</height>
+          <format>B8G8R8</format>
+        </image>
+        <clip>
+          <near>0.2</near>
+          <far>20</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+
+          <!-- Noise is sampled independently per pixel on each frame.
+               That pixel's noise value is added to each of its color
+               channels, which at that point lie in the range [0,1]. -->
+          <mean>0.0</mean>
+          <stddev>0.007</stddev>
+        </noise>
+      </camera>
+      
+      <plugin name="zed_camera_controller" filename="libgazebo_ros_openni_kinect.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        
+        <cameraName>mobile_hubo/zed_camera</cameraName>
+        <imageTopicName>zed/rgb/image_raw</imageTopicName>
+        <cameraInfoTopicName>zed/rgb/camera_info</cameraInfoTopicName>
+        <depthImageTopicName>zed/depth/image_raw</depthImageTopicName>
+        <depthImageCameraInfoTopicName>zed/depth/camera_info</depthImageCameraInfoTopicName>
+        <pointCloudTopicName>zed/depth/points</pointCloudTopicName>
+            
+        <frameName>Head_zed_camera</frameName>
+        <hackBaseline>0.07</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+
+ <!-- velodyne VLP16 lidar -->
+  <joint name="Head_velodyne_joint" type="fixed">
+    <axis xyz="0 0 1" />
+    <origin xyz="0 0 0.036" rpy="0 0 0"/>
+    <parent link="Body_vision"/>
+    <child link="Head_velodyne_lidar"/>
+  </joint>
+  
+  <link name="Head_velodyne_lidar">    
+  </link>
+ 
+  <gazebo reference="Head_velodyne_lidar">
+    <sensor type="ray" name="VLP16">
+	<pose frame="">0 0 0 0 0 0</pose>
+		
+      <visualize>false</visualize>
+      <update_rate>10</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+                <samples>440</samples>
+                <resolution>1</resolution>
+                <min_angle>-3.14</min_angle>
+                <max_angle>3.14</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>16</samples>
+                <resolution>1</resolution>
+                <min_angle>-15.0*3.14/180.0</min_angle>
+                <max_angle> 15.0*3.14/180.0</max_angle>
+              </vertical>
+        </scan>
+        <range>
+          <min>0.50</min>
+          <max>50.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+
+      <!-- must install by sudo apt get ros-kinetic-velodyne-gazeboplugin -->
+
+      <plugin name="laser_controller" filename="libgazebo_ros_velodyne_laser.so">
+        <topicName>/mobile_hubo/lidar/velodyne_points</topicName>
+        <frameName>Head_velodyne_lidar</frameName>
+        <alwaysOn>true</alwaysOn>
+      <updateRate>0</updateRate>
+      </plugin>
+    </sensor>
+   </gazebo>
+
+   
+  <!-- 3DM-GX5 imu -->
+  <!-- 3DM-GX5 imu pose needs revision -->
+  <joint name="Head_imu_joint" type="fixed">
+    <axis xyz="0 0 1" />
+    <origin xyz="0 0 -0.01" rpy="0 0 0"/>
+    <parent link="Body_vision"/>
+    <child link="Head_imu"/>
+  </joint>
+  
+  <link name="Head_imu">  
+  </link>
+  
+  <gazebo reference="Head_imu">
+     <gravity>true</gravity>
+    <sensor name="imu_sensor" type="imu">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+      <topic>__default_topic__</topic>
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <topicName>/mobile_hubo/imu</topicName>
+        <bodyName>Head_imu</bodyName>
+        <updateRateHZ>10.0</updateRateHZ>
+        <gaussianNoise>0.0</gaussianNoise>
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
+        <frameName>imu_link</frameName>
+      </plugin>
+      <pose>0 0 0 0 0 0</pose>
+    </sensor>
+  </gazebo>
+
+
+  
+  <!-- Differential drive controller  -->
+<!--
+  <gazebo>
+      <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so" >
+      <jointName> whbase_to_rwh, whbase_to_lwh </jointName>
+      <rosDebugLevel>Debug</rosDebugLevel>
+      <publishWheelTF>True</publishWheelTF>
+      <publishTf>1</publishTf>
+      <legacyMode>true</legacyMode>
+      <publishWheelJointState>true</publishWheelJointState>
+      <alwaysOn>true</alwaysOn>
+      <updateRate>100.0</updateRate>
+      <leftJoint>whbase_to_rwh</leftJoint>
+      <rightJoint>whbase_to_lwh</rightJoint>
+      <wheelSeparation>0.4</wheelSeparation>
+      <wheelDiameter>0.15</wheelDiameter>
+      <broadcastTF>1</broadcastTF>
+      <wheelTorque>30</wheelTorque>
+      <wheelAcceleration>1.8</wheelAcceleration>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryFrame>odom</odometryFrame>
+      <odometryTopic>odom</odometryTopic>
+      <robotBaseFrame>Body_WHBASE_plate_link</robotBaseFrame>
+    </plugin>
+  </gazebo>
+-->
+
+<!-- gazebo_ros_plugin  --> 
+  <gazebo>  
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+     <robotNamespace>/</robotNamespace>
+     <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    </plugin>
+  </gazebo>
+ 
+</robot>
+
